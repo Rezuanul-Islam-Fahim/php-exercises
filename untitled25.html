@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("hintText").innerHTML = "";
+            } else {
+                var xmlReq = new XMLHttpRequest();
+                xmlReq.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("hintText").innerHTML = this.responseText;
+                    }
+                };
+                xmlReq.open("GET", `untitled25.php?q=${str}`, true);
+                xmlReq.send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <b>Start typing a name in the input field below:</b><br><br>
+    <form action="">
+        <label for="name">Name:</label>
+        <input type="text" name="name" onkeyup="showHint(this.value)"> <br>
+        Suggestions: <span id="hintText"></span>
+    </form>
+</body>
+
+</html>
