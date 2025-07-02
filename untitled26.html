@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            margin: 0;
+            padding: 0;
+
+        }
+    </style>
+    <script>
+        function showUserData(str) {
+            if (str.length == 0) {
+                document.getElementById("userDataPanel").innerHTML = "";
+            } else {
+                var xmlReq = new XMLHttpRequest();
+                xmlReq.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("userDataPanel").innerHTML = this.responseText;
+                    }
+                };
+                xmlReq.open("GET", `untitled26.php?q=${str}`, true);
+                xmlReq.send();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <select onchange="showUserData(this.value)">
+            <option value="">Select a person:</option>
+            <option value="1">Rezuanul Islam Fahim</option>
+            <option value="2">John Doe</option>
+            <option value="3">John Mary</option>
+            <option value="6">Test User 1</option>
+            <option value="7">Test User 2</option>
+            <option value="8">Test User 3</option>
+        </select>
+        <br>
+        <br>
+        <div id="userDataPanel">Person's data will be shown here:</div>
+    </form>
+</body>
+
+</html>
